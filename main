@@ -1,0 +1,77 @@
+#include <QApplication>
+#include <QMainWindow>
+#include <QPushButton>
+#include <QVBoxLayout>
+#include <QLabel>
+#include <QTableWidget>
+#include <QHeaderView>
+#include <QMessageBox>
+#include <QDialog>
+#include <QFormLayout>
+#include <QLineEdit>
+#include <QDoubleSpinBox>
+
+class CoffeeShopApp : public QMainWindow {
+    Q_OBJECT
+
+public:
+    CoffeeShopApp(QWidget *parent = nullptr) : QMainWindow(parent) {
+        setWindowTitle("Coffee Shop Management");
+        resize(800, 600);
+
+        QWidget *centralWidget = new QWidget(this);
+        QVBoxLayout *layout = new QVBoxLayout(centralWidget);
+
+        QLabel *titleLabel = new QLabel("<h1>Coffee Shop Order Management</h1>", this);
+        layout->addWidget(titleLabel);
+
+        QPushButton *orderButton = new QPushButton("Place Order", this);
+        QPushButton *salesButton = new QPushButton("View Sales", this);
+        QPushButton *exitButton = new QPushButton("Exit", this);
+        
+        layout->addWidget(orderButton);
+        layout->addWidget(salesButton);
+        layout->addWidget(exitButton);
+        
+        connect(orderButton, &QPushButton::clicked, this, &CoffeeShopApp::placeOrder);
+        connect(salesButton, &QPushButton::clicked, this, &CoffeeShopApp::viewSales);
+        connect(exitButton, &QPushButton::clicked, this, &CoffeeShopApp::close);
+
+        setCentralWidget(centralWidget);
+    }
+
+private slots:
+    void placeOrder() {
+        QDialog orderDialog(this);
+        orderDialog.setWindowTitle("New Order");
+        QFormLayout form(&orderDialog);
+
+        QLineEdit itemName;
+        QDoubleSpinBox itemPrice;
+        itemPrice.setRange(0.1, 100.0);
+        itemPrice.setDecimals(2);
+
+        form.addRow("Item Name:", &itemName);
+        form.addRow("Price:", &itemPrice);
+
+        QPushButton submit("Submit", &orderDialog);
+        form.addRow(&submit);
+        connect(&submit, &QPushButton::clicked, [&]() {
+            QMessageBox::information(this, "Order Placed", "Item: " + itemName.text() + "\nPrice: $" + QString::number(itemPrice.value()));
+            orderDialog.accept();
+        });
+        
+        orderDialog.exec();
+    }
+
+    void viewSales() {
+        QMessageBox::information(this, "Sales", "Sales report feature coming soon!");
+    }
+};
+
+int main(int argc, char *argv[]) {
+    QApplication app(argc, argv);
+    CoffeeShopApp window;
+    window.show();
+    return app.exec();
+}

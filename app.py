@@ -1,23 +1,16 @@
 import streamlit as st
-import time
 
 st.title("📊 Coffee Shop Live Orders")
+st.write("### Enter a New Order")
 
-st.write("### Real-time order tracking")
+# Input fields for order details
+item_name = st.text_input("☕ Enter the coffee name:")
+item_price = st.number_input("💰 Enter the price:", min_value=0.1, max_value=100.0, step=0.1)
 
-# Simulated real-time output (can be replaced with actual C++ integration)
-orders = [
-    {"item": "Latte", "price": 4.99},
-    {"item": "Espresso", "price": 2.99},
-    {"item": "Cappuccino", "price": 3.99},
-    {"item": "Mocha", "price": 5.49},
-]
+if st.button("📩 Submit Order"):
+    if item_name and item_price:
+        st.success(f"✅ Order Received: {item_name} - ${item_price}")
+    else:
+        st.error("⚠ Please enter a valid item name and price!")
 
-placeholder = st.empty()
-
-for order in orders:
-    with placeholder.container():
-        st.success(f"☕ Order Received: {order['item']} - ${order['price']}")
-    time.sleep(2)
-
-st.write("### More orders will appear here...")
+st.write("### More orders will appear here as they are placed...")

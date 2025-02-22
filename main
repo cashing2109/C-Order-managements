@@ -3,8 +3,6 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QLabel>
-#include <QTableWidget>
-#include <QHeaderView>
 #include <QMessageBox>
 #include <QDialog>
 #include <QFormLayout>
@@ -75,3 +73,4 @@ int main(int argc, char *argv[]) {
     window.show();
     return app.exec();
 }
+

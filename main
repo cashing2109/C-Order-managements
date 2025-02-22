@@ -8,6 +8,10 @@
 #include <QFormLayout>
 #include <QLineEdit>
 #include <QDoubleSpinBox>
+#include <QSpinBox>
+
+int totalCupsSold = 0;
+double totalRevenue = 0.0;
 
 class CoffeeShopApp : public QMainWindow {
     Q_OBJECT
@@ -48,14 +52,22 @@ private slots:
         QDoubleSpinBox itemPrice;
         itemPrice.setRange(0.1, 100.0);
         itemPrice.setDecimals(2);
+        QSpinBox itemQuantity;
+        itemQuantity.setRange(1, 100);
 
         form.addRow("Item Name:", &itemName);
         form.addRow("Price:", &itemPrice);
+        form.addRow("Quantity:", &itemQuantity);
 
         QPushButton submit("Submit", &orderDialog);
         form.addRow(&submit);
         connect(&submit, &QPushButton::clicked, [&]() {
-            QMessageBox::information(this, "Order Placed", "Item: " + itemName.text() + "\nPrice: $" + QString::number(itemPrice.value()));
+            totalCupsSold += itemQuantity.value();
+            totalRevenue += itemPrice.value() * itemQuantity.value();
+            QMessageBox::information(this, "Order Placed",
+                "Item: " + itemName.text() +
+                "\nQuantity: " + QString::number(itemQuantity.value()) +
+                "\nTotal Price: $" + QString::number(itemPrice.value() * itemQuantity.value()));
             orderDialog.accept();
         });
         
@@ -63,7 +75,9 @@ private slots:
     }
 
     void viewSales() {
-        QMessageBox::information(this, "Sales", "Sales report feature coming soon!");
+        QMessageBox::information(this, "Sales Report",
+            "Total Cups Sold: " + QString::number(totalCupsSold) +
+            "\nTotal Revenue: $" + QString::number(totalRevenue));
     }
 };
 
@@ -73,4 +87,5 @@ int main(int argc, char *argv[]) {
     window.show();
     return app.exec();
 }
+
 

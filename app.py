@@ -3,7 +3,6 @@ import pandas as pd
 import plotly.express as px
 import os
 import datetime
-import time
 from fpdf import FPDF
 
 # Coffee options with prices and operating costs
@@ -35,18 +34,18 @@ total_profit = sales_data["Profit"].sum() if not sales_data.empty else 0
 
 st.title("📊 Coffee Shop Live Orders")
 
-# Live date & time with automatic updates
+# Live date & time with auto-refresh
 st.write("### 🕒 Live Date & Time")
 
 # Use `st.empty()` to update the time dynamically
 time_placeholder = st.empty()
 
 def update_time():
-    while True:
-        current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        time_placeholder.write(f"**{current_time}**")
-        time.sleep(1)
+    current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    time_placeholder.write(f"**{current_time}**")
+    st.experimental_rerun()  # Forces Streamlit to refresh on interaction
 
+# Call update_time on every Streamlit interaction
 update_time()
 
 st.write("### Select a Coffee Order")
@@ -131,3 +130,4 @@ if not sales_data.empty():
             file_name="daily_sales_report.pdf",
             mime="application/pdf"
         )
+

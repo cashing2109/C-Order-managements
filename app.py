@@ -58,17 +58,6 @@ if not sales_data.empty:
     fig = px.bar(sales_data, x="Coffee", y="Quantity", title="Sales by Coffee Type", color="Coffee")
     st.plotly_chart(fig)
 
-# Download button for daily report
-if not sales_data.empty:
-    st.write("### Download Daily Sales Report")
-    csv = sales_data.to_csv(index=False).encode('utf-8')
-    st.download_button(
-        label="📥 Download Report",
-        data=csv,
-        file_name="daily_sales_report.csv",
-        mime="text/csv"
-    )
-
 # Reset button to clear sales data
 if st.button("🔄 Reset Sales Data"):
     total_cups_sold = 0
@@ -76,4 +65,17 @@ if st.button("🔄 Reset Sales Data"):
     sales_data = pd.DataFrame(columns=["Coffee", "Quantity", "Total Price"])
     sales_data.to_csv(sales_data_file, index=False)
     st.warning("⚠ Sales data has been reset!")
+
+# Text before download button
+st.write("### Download Daily Sales Report")
+
+# Download button for daily report
+if not sales_data.empty:
+    csv = sales_data.to_csv(index=False).encode('utf-8')
+    st.download_button(
+        label="📥 Download Report",
+        data=csv,
+        file_name="daily_sales_report.csv",
+        mime="text/csv"
+    )
 

@@ -60,6 +60,12 @@ st.write("### Live Sales Report")
 st.write(f"Total Cups Sold: {total_cups_sold}")
 st.write(f"Total Revenue: ${total_revenue:.2f}")
 
+# Sales comparison graph
+if not sales_data.empty:
+    st.write("### Sales Trend")
+    fig = px.bar(sales_data, x="Coffee", y="Quantity", title="Sales by Coffee Type", color="Coffee")
+    st.plotly_chart(fig)
+
 # Reset button to clear sales data
 if st.button("🔄 Reset Sales Data"):
     total_cups_sold = 0
@@ -115,3 +121,4 @@ if not sales_data.empty():
             file_name="daily_sales_report.pdf",
             mime="application/pdf"
         )
+

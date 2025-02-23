@@ -41,7 +41,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-st.title("📊 Coffee Shop Live Orders")
+st.title("📊 Live Coffee Shop")
 
 st.write("### Select a Coffee Order")
 selected_coffee = st.selectbox("☕ Choose a coffee:", list(coffee_menu.keys()))
@@ -100,7 +100,7 @@ if not sales_data.empty:
 st.write("### Download Daily Sales Report")
 
 # PDF download button
-if not sales_data.empty():
+if not sales_data.empty:
     pdf_file = "daily_sales_report.pdf"
     pdf = FPDF()
     pdf.set_auto_page_break(auto=True, margin=15)
@@ -125,4 +125,5 @@ if not sales_data.empty():
             file_name="daily_sales_report.pdf",
             mime="application/pdf"
         )
+
 

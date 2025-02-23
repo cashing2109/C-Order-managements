@@ -2,6 +2,9 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import os
+import datetime
+import time
+import threading
 from fpdf import FPDF
 
 # Coffee options with prices and operating costs
@@ -32,6 +35,19 @@ total_cost = sales_data["Total Cost"].sum() if not sales_data.empty else 0
 total_profit = sales_data["Profit"].sum() if not sales_data.empty else 0
 
 st.title("📊 Coffee Shop Live Orders")
+
+# Live date & time
+date_time_placeholder = st.empty()
+
+def update_time():
+    while True:
+        current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        date_time_placeholder.write(f"🕒 **Current Time:** {current_time}")
+        time.sleep(1)
+
+# Run the live time update in the background
+thread = threading.Thread(target=update_time, daemon=True)
+thread.start()
 
 st.write("### Select a Coffee Order")
 selected_coffee = st.selectbox("☕ Choose a coffee:", list(coffee_menu.keys()))

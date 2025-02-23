@@ -40,7 +40,11 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-st.title("Live coffee shop")
+st.markdown("""
+    <h1 style='text-align: center;'>☕ Live Coffee Shop</h1>
+    <p style='text-align: center; font-size: 18px;'><strong>Made by MD H. Rahman</strong></p>
+    <p style='text-align: center;'><a href='https://www.linkedin.com/in/habib-rahmann/' target='_blank'>LinkedIn Profile</a></p>
+""", unsafe_allow_html=True)
 
 # Add creator name and LinkedIn profile
 st.write("**Made by MD H. Rahman**")

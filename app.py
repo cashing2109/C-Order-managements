@@ -3,7 +3,6 @@ import pandas as pd
 import plotly.express as px
 import os
 import datetime
-import time
 from fpdf import FPDF
 
 # Coffee options with prices and operating costs
@@ -35,21 +34,13 @@ total_profit = sales_data["Profit"].sum() if not sales_data.empty else 0
 
 st.title("📊 Coffee Shop Live Orders")
 
-# Live date & time with auto-refresh
+# Live date & time with interaction-based updates
 st.write("### 🕒 Live Date & Time")
 
 # Use `st.empty()` to dynamically update the time
 time_placeholder = st.empty()
-
-# Auto-refresh the time
-def update_time():
-    for _ in range(10000):  # Arbitrary large number to keep updating
-        current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        time_placeholder.write(f"**{current_time}**")
-        time.sleep(1)
-        st.rerun()  # Forces the app to refresh without errors
-
-update_time()
+current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+time_placeholder.write(f"**{current_time}**")
 
 st.write("### Select a Coffee Order")
 selected_coffee = st.selectbox("☕ Choose a coffee:", list(coffee_menu.keys()))

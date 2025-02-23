@@ -35,11 +35,11 @@ total_profit = sales_data["Profit"].sum() if not sales_data.empty else 0
 st.title("📊 Coffee Shop Live Orders")
 
 # Live date & time with interaction-based updates
-st.write("### 🕒 Live Date & Time")
-
 # Use `st.empty()` to dynamically update the time
 time_placeholder = st.empty()
-current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+import pytz
+est = pytz.timezone('US/Eastern')
+current_time = datetime.datetime.now(est).strftime("%m/%d/%Y %H:%M:%S")
 time_placeholder.write(f"**{current_time}**")
 
 st.write("### Select a Coffee Order")
@@ -124,4 +124,5 @@ if not sales_data.empty():
             file_name="daily_sales_report.pdf",
             mime="application/pdf"
         )
+
 

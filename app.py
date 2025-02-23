@@ -36,15 +36,13 @@ st.title("📊 Coffee Shop Live Orders")
 st.write("### Select a Coffee Order")
 selected_coffee = st.selectbox("☕ Choose a coffee:", list(coffee_menu.keys()))
 coffee_price = coffee_menu[selected_coffee]["price"]
-coffee_cost = coffee_menu[selected_coffee]["cost"]
 st.write(f"💰 Price: ${coffee_price:.2f}")
-st.write(f"⚙ Operating Cost: ${coffee_cost:.2f}")
 
 item_quantity = st.number_input("📦 Enter quantity:", min_value=1, max_value=100, step=1)
 
 if st.button("📩 Submit Order"):
     total_price = coffee_price * item_quantity
-    total_cost_value = coffee_cost * item_quantity
+    total_cost_value = coffee_menu[selected_coffee]["cost"] * item_quantity
     profit = total_price - total_cost_value
     total_cups_sold += item_quantity
     total_revenue += total_price

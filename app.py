@@ -47,8 +47,8 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Add creator name and LinkedIn profile
-st.write("**Made by MD H. Rahman**")
-st.markdown("[LinkedIn Profile](https://www.linkedin.com/in/habib-rahmann/)")
+#st.write("**Made by MD H. Rahman**")
+#st.markdown("[LinkedIn Profile](https://www.linkedin.com/in/habib-rahmann/)")
 
 st.write("### Select a Coffee Order")
 selected_coffee = st.selectbox("☕ Choose a coffee:", list(coffee_menu.keys()))

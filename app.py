@@ -3,6 +3,7 @@ import pandas as pd
 import plotly.express as px
 import os
 import datetime
+import pytz
 from fpdf import FPDF
 
 # Coffee options with prices and operating costs
@@ -32,17 +33,15 @@ total_revenue = sales_data["Total Price"].sum() if not sales_data.empty else 0
 total_cost = sales_data["Total Cost"].sum() if not sales_data.empty else 0
 total_profit = sales_data["Profit"].sum() if not sales_data.empty else 0
 
-st.markdown(f"<div style='text-align: right; font-size: 16px; font-weight: bold;'>{current_time}</div>", unsafe_allow_html=True)
-
-st.title("📊 Coffee Shop Live Orders")
-
-# Live date & time with interaction-based updates
-# Use `st.empty()` to dynamically update the time
-time_placeholder = st.empty()
-import pytz
+# Display the current date and time at the top-right corner
 est = pytz.timezone('US/Eastern')
 current_time = datetime.datetime.now(est).strftime("%m/%d/%Y, %H:%M:%S")
-time_placeholder.write(f"**{current_time}**")
+st.markdown(
+    f"<div style='text-align: right; font-size: 16px; font-weight: bold;'>{current_time}</div>",
+    unsafe_allow_html=True
+)
+
+st.title("📊 Coffee Shop Live Orders")
 
 st.write("### Select a Coffee Order")
 selected_coffee = st.selectbox("☕ Choose a coffee:", list(coffee_menu.keys()))
@@ -126,5 +125,4 @@ if not sales_data.empty():
             file_name="daily_sales_report.pdf",
             mime="application/pdf"
         )
-
 

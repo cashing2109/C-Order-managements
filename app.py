@@ -32,6 +32,8 @@ total_revenue = sales_data["Total Price"].sum() if not sales_data.empty else 0
 total_cost = sales_data["Total Cost"].sum() if not sales_data.empty else 0
 total_profit = sales_data["Profit"].sum() if not sales_data.empty else 0
 
+st.markdown(f"<div style='text-align: right; font-size: 16px; font-weight: bold;'>{current_time}</div>", unsafe_allow_html=True)
+
 st.title("📊 Coffee Shop Live Orders")
 
 # Live date & time with interaction-based updates
@@ -39,7 +41,7 @@ st.title("📊 Coffee Shop Live Orders")
 time_placeholder = st.empty()
 import pytz
 est = pytz.timezone('US/Eastern')
-current_time = datetime.datetime.now(est).strftime("%m/%d/%Y %H:%M:%S")
+current_time = datetime.datetime.now(est).strftime("%m/%d/%Y, %H:%M:%S")
 time_placeholder.write(f"**{current_time}**")
 
 st.write("### Select a Coffee Order")

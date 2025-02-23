@@ -36,7 +36,7 @@ total_profit = sales_data["Profit"].sum() if not sales_data.empty else 0
 
 st.title("📊 Coffee Shop Live Orders")
 
-# Live date & time
+# Live date & time with auto-refresh
 date_time_placeholder = st.empty()
 
 def update_time():
@@ -119,11 +119,7 @@ if not sales_data.empty():
     pdf.cell(200, 10, f"Total Revenue: ${total_revenue:.2f}", ln=True)
     pdf.cell(200, 10, f"Total Operating Cost: ${total_cost:.2f}", ln=True)
     pdf.cell(200, 10, f"Total Profit: ${total_profit:.2f}", ln=True)
-    pdf.ln(10)
-    pdf.set_font("Arial", style='B', size=12)
-    pdf.cell(200, 10, "Best-Selling Coffee:", ln=True)
-    pdf.set_font("Arial", size=12)
-    pdf.cell(200, 10, f"🏆 {best_seller} ({best_seller_count} sold)", ln=True)
+    pdf.cell(200, 10, f"🏆 Best-Selling Coffee: {best_seller} ({best_seller_count} sold)", ln=True)
     pdf.ln(10)
     for index, row in sales_data.iterrows():
         pdf.cell(200, 10, f"{row['Quantity']}x {row['Coffee']} - ${row['Total Price']:.2f}", ln=True)

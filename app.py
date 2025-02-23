@@ -4,7 +4,6 @@ import plotly.express as px
 import os
 import datetime
 import pytz
-from fpdf import FPDF
 
 # Coffee options with prices and operating costs
 coffee_menu = {
@@ -99,29 +98,16 @@ if not sales_data.empty:
 # Text before download button
 st.write("### Download Daily Sales Report")
 
-# PDF download button
+# CSV download button
 if not sales_data.empty:
-    pdf_file = "daily_sales_report.pdf"
-    pdf = FPDF()
-    pdf.set_auto_page_break(auto=True, margin=15)
-    pdf.add_page()
-    
-    pdf.set_font("Helvetica", size=12)
-    pdf.ln(10)
-    pdf.cell(200, 10, f"Total Cups Sold: {total_cups_sold}", ln=True)
-    pdf.cell(200, 10, f"Total Revenue: ${total_revenue:.2f}", ln=True)
-    pdf.cell(200, 10, f"Total Operating Cost: ${total_cost:.2f}", ln=True)
-    pdf.cell(200, 10, f"Total Profit: ${total_profit:.2f}", ln=True)
-    pdf.cell(200, 10, f"🏆 Best-Selling Coffee: {best_seller} ({best_seller_count} sold)", ln=True)
-    pdf.ln(10)
-    for index, row in sales_data.iterrows():
-        pdf.cell(200, 10, f"{row['Quantity']}x {row['Coffee']} - ${row['Total Price']:.2f}", ln=True)
-    pdf.output(pdf_file)
-    with open(pdf_file, "rb") as file:
+    csv_file = "daily_sales_report.csv"
+    sales_data.to_csv(csv_file, index=False)
+    with open(csv_file, "rb") as file:
         st.download_button(
-            label="📥 Download Report (PDF)",
+            label="📥 Download Report (CSV)",
             data=file,
-            file_name="daily_sales_report.pdf",
-            mime="application/pdf"
+            file_name="daily_sales_report.csv",
+            mime="text/csv"
         )
+
 

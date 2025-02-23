@@ -36,13 +36,16 @@ total_profit = sales_data["Profit"].sum() if not sales_data.empty else 0
 
 st.title("📊 Coffee Shop Live Orders")
 
-# Live date & time with auto-refresh
-date_time_placeholder = st.empty()
+# Live date & time with automatic updates
+st.write("### 🕒 Live Date & Time")
+
+# Use `st.empty()` to update the time dynamically
+time_placeholder = st.empty()
 
 def update_time():
     while True:
         current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        date_time_placeholder.write(f"🕒 **Current Time:** {current_time}")
+        time_placeholder.write(f"**{current_time}**")
         time.sleep(1)
 
 # Run the live time update in the background
@@ -131,4 +134,3 @@ if not sales_data.empty():
             file_name="daily_sales_report.pdf",
             mime="application/pdf"
         )
-

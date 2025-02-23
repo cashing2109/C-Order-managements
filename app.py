@@ -105,9 +105,8 @@ if not sales_data.empty:
     pdf = FPDF()
     pdf.set_auto_page_break(auto=True, margin=15)
     pdf.add_page()
-    pdf.add_font("Arial", "", "arial.ttf", uni=True)
-    pdf.set_font("Arial", size=12, style='')
-    pdf.cell(200, 10, "Daily Sales Report", ln=True, align='C')
+    
+    pdf.set_font("Helvetica", size=12)
     pdf.ln(10)
     pdf.cell(200, 10, f"Total Cups Sold: {total_cups_sold}", ln=True)
     pdf.cell(200, 10, f"Total Revenue: ${total_revenue:.2f}", ln=True)

@@ -108,7 +108,8 @@ if not sales_data.empty:
     pdf.set_font("Arial", style='B', size=16)
     pdf.cell(200, 10, "Daily Sales Report", ln=True, align='C')
     pdf.ln(10)
-    pdf.set_font("Arial", size=12)
+    pdf.add_font("Arial", "", "arial.ttf", uni=True)
+pdf.set_font("Arial", size=12, style='')
     pdf.cell(200, 10, f"Total Cups Sold: {total_cups_sold}", ln=True)
     pdf.cell(200, 10, f"Total Revenue: ${total_revenue:.2f}", ln=True)
     pdf.cell(200, 10, f"Total Operating Cost: ${total_cost:.2f}", ln=True)
@@ -125,5 +126,3 @@ if not sales_data.empty:
             file_name="daily_sales_report.pdf",
             mime="application/pdf"
         )
-
-

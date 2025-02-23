@@ -4,7 +4,6 @@ import plotly.express as px
 import os
 import datetime
 import time
-import threading
 from fpdf import FPDF
 
 # Coffee options with prices and operating costs
@@ -48,9 +47,7 @@ def update_time():
         time_placeholder.write(f"**{current_time}**")
         time.sleep(1)
 
-# Run the live time update in the background
-thread = threading.Thread(target=update_time, daemon=True)
-thread.start()
+update_time()
 
 st.write("### Select a Coffee Order")
 selected_coffee = st.selectbox("☕ Choose a coffee:", list(coffee_menu.keys()))

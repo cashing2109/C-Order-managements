@@ -40,7 +40,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-st.title("📊 Coffee Shop Live Orders")
+st.title("📊 Live Coffee Shop")
 
 st.write("### Select a Coffee Order")
 selected_coffee = st.selectbox("☕ Choose a coffee:", list(coffee_menu.keys()))

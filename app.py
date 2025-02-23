@@ -34,7 +34,7 @@ total_profit = sales_data["Profit"].sum() if not sales_data.empty else 0
 
 # Display the current date and time at the top-right corner
 est = pytz.timezone('US/Eastern')
-current_time = datetime.datetime.now(est).strftime("%m/%d/%Y, %H:%M:%S")
+current_time = datetime.datetime.now(est).strftime("%m/%d/%Y, %I:%M:%S %p")
 st.markdown(
     f"<div style='text-align: right; font-size: 16px; font-weight: bold;'>{current_time}</div>",
     unsafe_allow_html=True

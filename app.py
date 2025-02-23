@@ -3,14 +3,14 @@ import pandas as pd
 import plotly.express as px
 import os
 
-# Coffee options with prices
+# Coffee options with prices (with size info)
 coffee_menu = {
-    "Latte": 4.99,
-    "Espresso": 2.99,
-    "Cappuccino": 3.99,
-    "Mocha": 5.49,
-    "Americano": 3.49,
-    "Macchiato": 4.29
+    "Latte (16 oz)": 4.99,
+    "Espresso (16 oz)": 2.99,
+    "Cappuccino (16 oz)": 3.99,
+    "Mocha (16 oz)": 5.49,
+    "Americano (16 oz)": 3.49,
+    "Macchiato (16 oz)": 4.29
 }
 
 # Ensure persistent storage for sales data
@@ -65,3 +65,4 @@ if st.button("🔄 Reset Sales Data"):
     sales_data = pd.DataFrame(columns=["Coffee", "Quantity", "Total Price"])
     sales_data.to_csv(sales_data_file, index=False)
     st.warning("⚠ Sales data has been reset!")
+
